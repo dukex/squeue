@@ -1,0 +1,92 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Squeue by dukex</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Squeue</h1>
+        <p>Simple delayed queue in golang</p>
+        <p class="view"><a href="https://github.com/dukex/squeue">View the Project on GitHub <small>dukex/squeue</small></a></p>
+        <ul>
+          <li><a href="https://github.com/dukex/squeue/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/dukex/squeue/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/dukex/squeue">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a name="install" class="anchor" href="#install"><span class="octicon octicon-link"></span></a>Install</h2>
+
+<div class="highlight highlight-bash"><pre><span class="nv">$ </span>go get github.com/dukex/squeue
+</pre></div>
+
+<h2>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>USAGE</h2>
+
+<p>Creating a queue to run task with 2 seconds interval</p>
+
+<div class="highlight highlight-go"><pre><span class="kn">package</span> <span class="nx">main</span>
+
+<span class="kn">import</span> <span class="s">"github.com/dukex/squeue"</span>
+<span class="kn">import</span> <span class="s">"fmt"</span>
+<span class="kn">import</span> <span class="s">"time"</span>
+
+<span class="kd">var</span> <span class="nx">QUEUE</span> <span class="o">*</span><span class="nx">squeue</span><span class="p">.</span><span class="nx">Queue</span>
+
+<span class="kd">func</span> <span class="nx">main</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">QUEUE</span> <span class="p">=</span> <span class="nx">squeue</span><span class="p">.</span><span class="nx">NewQueue</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+  <span class="nx">QUEUE</span><span class="p">.</span><span class="nx">Run</span><span class="p">()</span>
+
+  <span class="nx">QUEUE</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"first!"</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="nx">QUEUE</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Hi"</span><span class="p">)</span>
+  <span class="p">})</span>
+  <span class="nx">QUEUE</span><span class="p">.</span><span class="nx">Push</span><span class="p">(</span><span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+    <span class="nx">fmt</span><span class="p">.</span><span class="nx">Println</span><span class="p">(</span><span class="s">"Hello!"</span><span class="p">)</span>
+  <span class="p">})</span>
+
+  <span class="o">&lt;-</span><span class="nx">time</span><span class="p">.</span><span class="nx">After</span><span class="p">(</span><span class="mi">10</span> <span class="o">*</span> <span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">)</span>
+<span class="p">}</span>
+</pre></div>
+
+<p>Output every 2 second</p>
+
+<pre><code>first!
+Hi
+Hello!
+</code></pre>
+
+<h2>
+<a name="who-use-it" class="anchor" href="#who-use-it"><span class="octicon octicon-link"></span></a>Who use it?</h2>
+
+<ul>
+<li>
+<a href="https://twitter.com/@ideiasliberdade">Twitter Bot Ideias da Liberdade</a>
+Using to tweet with 1 minute interval <a href="https://github.com/dukex/ideiasliberdade/blob/master/ideiasliberdade.go#L93-L98">code</a>
+</li>
+</ul>
+      </section>
+    </div>
+    <footer>
+      <p>Project maintained by <a href="https://github.com/dukex">dukex</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+    
+  </body>
+</html>
